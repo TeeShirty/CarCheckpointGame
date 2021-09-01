@@ -2074,7 +2074,7 @@ MonoBehaviour:
   _centerOfMass: {fileID: 1346903351}
   _motorForce: 1000
   _brakeForce: 3000
-  _maxSteeringAngle: 30
+  _maxSteeringAngle: 40
   _wheelColliderFrontLeft: {fileID: 26580096}
   _wheelColliderFrontRight: {fileID: 614914802}
   _wheelColliderBackLeft: {fileID: 889929773}

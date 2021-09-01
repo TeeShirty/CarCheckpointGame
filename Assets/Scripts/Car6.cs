@@ -13,8 +13,23 @@ public class Car6 : MonoBehaviour
     private float _horizontalInput;
     private float _verticalInput;
     private float _currentSteerAngle;
-    private float _currentBrakeForce;
-    private bool _isBraking;
+    private float _currentBrakeForce = 0;
+    private bool _isBraking = false;
+
+    //use getter and setter 
+    public bool isBraking
+    {
+        get { return _isBraking; }
+        set
+        {
+            if (_isBraking == value)
+                return;
+
+            _isBraking = value;
+            _currentBrakeForce = _isBraking ? _brakeForce : 0f;
+            ApplyBrakes();
+        }
+    }
 
     [SerializeField] private Transform _centerOfMass;
 
@@ -49,7 +64,8 @@ public class Car6 : MonoBehaviour
         UpdateWheels();
 
         Debug.Log("_wheelColliderBackLeft.motorTorque " + _wheelColliderBackLeft.motorTorque);
-        Debug.Log("_wheelColliderBackLeft.brakeTorque " + _wheelColliderBackLeft.brakeTorque);
+        Debug.Log("_wheelColliderBackRight.brakeTorque " + _wheelColliderBackRight.brakeTorque);
+        Debug.Log(_isBraking);
     }
 
   
@@ -57,7 +73,7 @@ public class Car6 : MonoBehaviour
     {
         _horizontalInput = Input.GetAxis(_HORIZONTAL);
         _verticalInput = Input.GetAxis(_VERTICAL);
-        _isBraking = Input.GetKeyDown(KeyCode.Space);
+        isBraking = Input.GetKey(KeyCode.Space);
     }
 
 
@@ -65,11 +81,11 @@ public class Car6 : MonoBehaviour
     {
         _wheelColliderBackLeft.motorTorque = _verticalInput * _motorForce;
         _wheelColliderBackRight.motorTorque = _verticalInput * _motorForce;
-        _currentBrakeForce = _isBraking ? _brakeForce : 0f;
-        if (_isBraking)
-        {
-            ApplyBrakes();
-        }
+        
+        //if (_isBraking)
+        //{
+        //    ApplyBrakes();
+        //}
     }
 
 
